@@ -12,7 +12,7 @@ function draw_one_frame(words, vocal, drum, bass, other, counter) {
       firstRun = false
   }
 
-  image(Horse,0,0);
+  // image(Horse,0,0);
 
   fill(20,243,127);
 
@@ -49,4 +49,14 @@ function draw_one_frame(words, vocal, drum, bass, other, counter) {
       curveVertex(1200,300);
     endShape();
 
-}
+
+    for (let x = canvasWidth/6; x < canvasWidth; x +=canvasWidth/6){
+      for(let y = canvasHeight/4; y < canvasHeight; y +=canvasHeight/4){
+         fill(54,12,165);
+          push();
+            translate(x,y);
+            rect(0,0,canvasWidth/12);
+          pop();
+      }
+    }
+  }
