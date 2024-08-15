@@ -92,8 +92,14 @@ function draw_one_frame(words, vocal, drum, bass, other, counter) {
     // line(point7volume[0], point7volume[1], point8volume[0], point8volume[1]);
     // line(point8volume[0], point8volume[1], point1volume[0], point1volume[1]);
 
-    let point2volume = [centerX + (o * cos(315)), centerY + (o * sin(315))];
+  let numberOfTimes = 2
+    for(let i = 0; i <4*numberOfTimes; i++)
+      let point[i] = [centerX + (o * cos(i*360/4*numberOfTimes)), centerY + (o * sin(i*360/4*numberOfTimes))];
+    beginShape();
+    for(let i = 0; i <= 4*numberOfTimes; i++){
+    vertex(point[i][0], point[i][1]);
+    }
+    endShape();
 
-  let numberOfPoints
-    for(let i = 0; i <)
+
 }
