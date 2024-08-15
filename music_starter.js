@@ -1,5 +1,7 @@
 let Horse;
 let firstRun = true
+let numberOfTimes = 8 //Changes the Number of times the 4 audio leevels are dsipalyed 
+
 
 // vocal, drum, bass, and other are volumes ranging from 0 to 100
 function draw_one_frame(words, vocal, drum, bass, other, counter) {
@@ -16,90 +18,81 @@ function draw_one_frame(words, vocal, drum, bass, other, counter) {
 
   // image(Horse,0,0);
 
-  fill(20,243,127);
+fill(20,243,127);
+stroke(255);
 
-    let circleRadius = 350
-    let v = map(vocal,0,100,0,circleRadius);
-    let d = map(drum,0,100,0,circleRadius);
-    let b = map(bass,0,100,0,circleRadius);
-    let o = map(other,0,100,0,circleRadius);
+let circleRadius = 350
+let v1 = map(vocal,0,100,0,circleRadius);
+let d1 = map(drum,0,100,0,circleRadius);
+let b1 = map(bass,0,100,0,circleRadius);
+let o1 = map(other,0,100,0,circleRadius);
+let v2 = map(vocal,0,100,0,(3/4)*circleRadius);
+let d2 = map(drum,0,100,0,(3/4)*circleRadius);
+let b2 = map(bass,0,100,0,(3/4)*circleRadius);
+let o2 = map(other,0,100,0,(3/4)*circleRadius);
     
-    let centerX = canvasX / 2;
-    let centerY = canvasY / 2;
+let centerX = canvasX / 2;
+let centerY = canvasY / 2;
 
 
-    stroke(255); // Set the stroke color to white
-    
-    let point3 = [centerX + (circleRadius * cos(0)), centerY + (circleRadius * sin(0))];
-    let point4 = [centerX + (circleRadius * cos(45)), centerY + (circleRadius * sin(45))];
-    let point5 = [centerX + (circleRadius * cos(90)), centerY + (circleRadius * sin(90))];
-    let point6 = [centerX + (circleRadius * cos(135)), centerY + (circleRadius * sin(135))];
-    let point7 = [centerX + (circleRadius * cos(180)), centerY + (circleRadius * sin(180))];
-    let point8 = [centerX + (circleRadius * cos(225)), centerY + (circleRadius * sin(225))];
-    let point1 = [centerX + (circleRadius * cos(270)), centerY + (circleRadius * sin(270))];
-    let point2 = [centerX + (circleRadius * cos(315)), centerY + (circleRadius * sin(315))];
+const AudioLevelPoint1 = [];
+const AudioLevelPoint2 = [];
 
-    circle(point1[0], point1[1], 20); // Adjust the circle radius as needed
-    circle(point2[0], point2[1], 20);
-    circle(point3[0], point3[1], 20);
-    circle(point4[0], point4[1], 20);
-    circle(point5[0], point5[1], 20);
-    circle(point6[0], point6[1], 20);
-    circle(point7[0], point7[1], 20);
-    circle(point8[0], point8[1], 20);
-
-    line(point1[0], point1[1],point5[0],point5[1])
-    line(point2[0], point2[1],point6[0],point6[1])
-    line(point3[0], point3[1],point7[0],point7[1])
-    line(point4[0], point4[1],point8[0],point8[1])
-    
-    let point3volume = [centerX + (v * cos(0)), centerY + (v * sin(0))];
-    let point4volume = [centerX + (d * cos(45)), centerY + (d * sin(45))];
-    let point5volume = [centerX + (b * cos(90)), centerY + (b * sin(90))];
-    let point6volume = [centerX + (o * cos(135)), centerY + (o * sin(135))];
-    let point7volume = [centerX + (v * cos(180)), centerY + (v * sin(180))];
-    let point8volume = [centerX + (d * cos(225)), centerY + (d * sin(225))];
-    let point1volume = [centerX + (b * cos(270)), centerY + (b * sin(270))];
-    let point2volume = [centerX + (o * cos(315)), centerY + (o * sin(315))];
-
-    circle(point1volume[0], point1volume[1], 20);
-    circle(point2volume[0], point2volume[1], 20);
-    circle(point3volume[0], point3volume[1], 20);
-    circle(point4volume[0], point4volume[1], 20);
-    circle(point5volume[0], point5volume[1], 20);
-    circle(point6volume[0], point6volume[1], 20);
-    circle(point7volume[0], point7volume[1], 20);
-    circle(point8volume[0], point8volume[1], 20);
-
-    beginShape();
-    vertex(point1volume[0], point1volume[1]);
-    vertex(point2volume[0], point2volume[1]);
-    vertex(point3volume[0], point3volume[1]);
-    vertex(point4volume[0], point4volume[1]);
-    vertex(point5volume[0], point5volume[1]);
-    vertex(point6volume[0], point6volume[1]);
-    vertex(point7volume[0], point7volume[1]);
-    vertex(point8volume[0], point8volume[1]);
-    vertex(point1volume[0], point1volume[1]);
-    endShape();
-
-    // line(point1volume[0], point1volume[1], point2volume[0], point2volume[1]); // Adjust the circle radius as needed
-    // line(point2volume[0], point2volume[1], point3volume[0], point3volume[1]);
-    // line(point3volume[0], point3volume[1], point4volume[0], point4volume[1]);
-    // line(point4volume[0], point4volume[1], point5volume[0], point5volume[1]);
-    // line(point5volume[0], point5volume[1], point6volume[0], point6volume[1]);
-    // line(point6volume[0], point6volume[1], point7volume[0], point7volume[1]);
-    // line(point7volume[0], point7volume[1], point8volume[0], point8volume[1]);
-    // line(point8volume[0], point8volume[1], point1volume[0], point1volume[1]);
-
-  let numberOfTimes = 2
-    for(let i = 0; i <4*numberOfTimes; i++)
-      let point[i] = [centerX + (o * cos(i*360/4*numberOfTimes)), centerY + (o * sin(i*360/4*numberOfTimes))];
-    beginShape();
-    for(let i = 0; i <= 4*numberOfTimes; i++){
-    vertex(point[i][0], point[i][1]);
+for(let i = 0; i < 4*numberOfTimes; i+=4){
+  AudioLevelPoint1.push([centerX + (v1 * cos((i+0)*360/(4*numberOfTimes))), centerY + (v1 * sin((i+0)*360/(4*numberOfTimes)))]);
+  AudioLevelPoint1.push([centerX + (d1 * cos((i+1)*360/(4*numberOfTimes))), centerY + (d1 * sin((i+1)*360/(4*numberOfTimes)))]);
+  AudioLevelPoint1.push([centerX + (b1 * cos((i+2)*360/(4*numberOfTimes))), centerY + (b1 * sin((i+2)*360/(4*numberOfTimes)))]);
+  AudioLevelPoint1.push([centerX + (o1 * cos((i+3)*360/(4*numberOfTimes))), centerY + (o1 * sin((i+3)*360/(4*numberOfTimes)))]);
+  AudioLevelPoint2.push([centerX + (b2 * cos((i+0)*360/(4*numberOfTimes))), centerY + (b2 * sin((i+0)*360/(4*numberOfTimes)))]);
+  AudioLevelPoint2.push([centerX + (o2 * cos((i+1)*360/(4*numberOfTimes))), centerY + (o2 * sin((i+1)*360/(4*numberOfTimes)))]);
+  AudioLevelPoint2.push([centerX + (v2 * cos((i+2)*360/(4*numberOfTimes))), centerY + (v2 * sin((i+3)*360/(4*numberOfTimes)))]);
+  AudioLevelPoint2.push([centerX + (d2 * cos((i+3)*360/(4*numberOfTimes))), centerY + (d2 * sin((i+4)*360/(4*numberOfTimes)))]);
+} 
+fill(20,243,127);
+beginShape();
+    for(let i = 0; i < 4*numberOfTimes; i++){
+      vertex(AudioLevelPoint1[i][0],AudioLevelPoint1[i][1]);
     }
-    endShape();
+endShape();
+
+fill(213,54,127);
+beginShape();
+    for(let i = 0; i < 4*numberOfTimes; i++){
+      vertex(AudioLevelPoint2[i][0],AudioLevelPoint2[i][1]);
+    }
+endShape();
+
+    for(let i = 0; i < 4*numberOfTimes; i++){
+      circle(AudioLevelPoint1[i][0],AudioLevelPoint1[i][1],10);
+    }
+
+    for(let i = 0; i < 4*numberOfTimes; i++){
+      circle(AudioLevelPoint2[i][0],AudioLevelPoint2[i][1],10);
+    }
+  
+const LinesPointsPairs = [];
+
+for(let i = 0; i < 4 * numberOfTimes; i+=0.5){
+  LinesPointsPairs.push([
+    centerX + (circleRadius * cos(i * 360 / (2 * numberOfTimes))),
+    centerY + (circleRadius * sin(i * 360 / (2 * numberOfTimes))),
+    centerX + (circleRadius * cos((i + numberOfTimes) * 360 / (2 * numberOfTimes))),
+    centerY + (circleRadius * sin((i + numberOfTimes) * 360 / (2 * numberOfTimes)))
+  ]);
+}
+
+for(let i = 0; i < 2 * numberOfTimes; i++){
+  line(LinesPointsPairs[i][0],LinesPointsPairs[i][1],LinesPointsPairs[i][2],LinesPointsPairs[i][3]);
+  circle(LinesPointsPairs[i][0],LinesPointsPairs[i][1],10);
+  circle(LinesPointsPairs[i][2],LinesPointsPairs[i][3],10);
+}
+
+
+
+
 
 
 }
+
+
+
