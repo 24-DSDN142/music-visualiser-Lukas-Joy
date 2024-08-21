@@ -16,15 +16,26 @@ function draw_one_frame(words, vocal, drum, bass, other, counter) {
       firstRun = false
   }
 
-  // image(Horse,0,0);
-background(135);
+image(Horse,0,0);
+
 fill(20,243,127);
 stroke(255);
 strokeWeight(2);
-donutVisual(canvasX / 2,canvasY / 2,2500,0.45,1,0.75,0.2);
-donutVisual(canvasX / 2,canvasY / 2,500,0.45,1,0.75,0.2);
-donutVisual(canvasX / 2,canvasY / 2,100,0.45,1,0.75,0.2);
 
+donutVisual(canvasX / 2, canvasY / 2,250,0.45,1,0.75,0.2);
+
+donutPlace(canvasX / 4,canvasY / 2, 0, -(map(drum,0,100,-canvasY / 2,canvasY / 2)));
+donutPlace(3 * canvasX / 4,canvasY / 2, 0, -(map(drum,0,100,-canvasY / 2,canvasY / 2)));
+
+donutPlace(canvasX / 4,canvasY / 2, 0, (map(drum,0,100,-canvasY / 2,canvasY / 2)));
+donutPlace(3 * canvasX / 4,canvasY / 2, 0, (map(drum,0,100,-canvasY / 2,canvasY / 2)));
+
+function donutPlace(positionX, positionY, translateX, tranlateY){
+push();
+translate(translateX, tranlateY);
+donutVisual(positionX, positionY,250,0.45,1,0.75,0.2);
+pop();
+}
 function donutVisual(centerX, centerY,circleRadius,confine1a,confine1b,confine2a,confine2b){
 
 let adjustment1a = (centerY - (confine1a* circleRadius));
