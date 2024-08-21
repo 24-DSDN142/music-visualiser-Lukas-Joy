@@ -17,23 +17,34 @@ function draw_one_frame(words, vocal, drum, bass, other, counter) {
   }
 
 image(Horse,0,0);
+background(135);
+let total = map(vocal+drum+bass+other,0,359.57,-200,255);
+let totalAngleNumber = map(vocal+drum+bass+other,0,359.57, 0, 360);
+for(i = 0; i <= 360; i+=totalAngleNumber){
+  var totalAngle = i
+  if(i==360){
+    i=0
+  }
+}
 
-fill(20,243,127);
-stroke(255);
+
+
+fill(total,total,total);
+stroke(255,total);
 strokeWeight(2);
 
-donutVisual(canvasX / 2, canvasY / 2,250,0.45,1,0.75,0.2);
+donutPlace(canvasX / 2, canvasY / 2, 0, 0, totalAngle);
 
-donutPlace(canvasX / 4,canvasY / 2, 0, -(map(drum,0,100,-canvasY / 2,canvasY / 2)));
-donutPlace(3 * canvasX / 4,canvasY / 2, 0, -(map(drum,0,100,-canvasY / 2,canvasY / 2)));
+// donutPlace(canvasX / 4,canvasY / 2, 0, -(map(drum,0,100,-canvasY / 2,canvasY / 2)),totalAngle);
+// donutPlace(3 * canvasX / 4,canvasY / 2, 0, -(map(drum,0,100,-canvasY / 2,canvasY / 2)),totalAngle);
+// donutPlace(canvasX / 4,canvasY / 2, 0, (map(drum,0,100,-canvasY / 2,canvasY / 2)),totalAngle);
+// donutPlace(3 * canvasX / 4,canvasY / 2, 0, (map(drum,0,100,-canvasY / 2,canvasY / 2)),totalAngle);
 
-donutPlace(canvasX / 4,canvasY / 2, 0, (map(drum,0,100,-canvasY / 2,canvasY / 2)));
-donutPlace(3 * canvasX / 4,canvasY / 2, 0, (map(drum,0,100,-canvasY / 2,canvasY / 2)));
-
-function donutPlace(positionX, positionY, translateX, tranlateY){
+function donutPlace(positionX, positionY, translateX, tranlateY, rotation){
 push();
-translate(translateX, tranlateY);
-donutVisual(positionX, positionY,250,0.45,1,0.75,0.2);
+translate(positionX+translateX, positionY+tranlateY);
+rotate(rotation);
+donutVisual(0, 0,500,0.45,1,0.75,0.2);
 pop();
 }
 function donutVisual(centerX, centerY,circleRadius,confine1a,confine1b,confine2a,confine2b){
@@ -44,15 +55,20 @@ let adjustment1b = (centerY - (confine1b* circleRadius));
 let adjustment2a = (centerY - (confine2a* circleRadius));
 let adjustment2b = (centerY - (confine2b* circleRadius));
 
-let vocalMap1 = map(vocal,0,100,adjustment1a,adjustment1b);
-let drumMap1 = map(drum,0,100,adjustment1a,adjustment1b);
-let bassMap1 = map(bass,0,100,adjustment1a,adjustment1b);
-let otherMap1 = map(other,0,100,adjustment1a,adjustment1b);
+let v = map(vocal, 0, 100, 0,89.23);
+let d = map(drum, 0, 100, 0,93.26);
+let b = map(bass, 0, 100, 0,92.22);
+let o = map(other, 0, 100, 0,84.86);
 
-let vocalMap2 = map(vocal,0,100,adjustment2a,adjustment2b);
-let drumMap2 = map(drum,0,100,adjustment2a,adjustment2b);
-let bassMap2 = map(bass,0,100,adjustment2a,adjustment2b);
-let otherMap2 = map(other,0,100,adjustment2a,adjustment2b);
+let vocalMap1 = map(v,0,89.23,adjustment1a,adjustment1b);
+let drumMap1 = map(d,0,93.26,adjustment1a,adjustment1b);
+let bassMap1 = map(b,0,92.22,adjustment1a,adjustment1b);
+let otherMap1 = map(o,0,84.86,adjustment1a,adjustment1b);
+
+let vocalMap2 = map(v,0,89.23,adjustment2a,adjustment2b);
+let drumMap2 = map(d,0,93.26,adjustment2a,adjustment2b);
+let bassMap2 = map(b,0,92.22,adjustment2a,adjustment2b);
+let otherMap2 = map(o,0,84.86,adjustment2a,adjustment2b);
 
 let θ = (360/(4*numberOfTimes));
 
@@ -75,7 +91,7 @@ for(let i = 0; i < 4*numberOfTimes; i+=4){
   } 
 }
 
-fill(20,243,127);
+fill(20,243,127,total);
 beginShape();
     for(let i = 0; i < 4*numberOfTimes; i++){
       vertex(AudioLevelPoint1[i][0],AudioLevelPoint1[i][1]);
