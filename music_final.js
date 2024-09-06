@@ -13,19 +13,6 @@ function add_to_history(history, d) {
   history.push(d);
 }
 
-function generateNoiseGrid(gridSize) {
-  for (let x = 0; x < width; x += gridSize) {
-    for (let y = 0; y < height; y += gridSize) {
-      if (random() > 0.5) {
-        fill(255); // white
-      } else {
-        fill(0); // black
-      }
-      rect(x, y, gridSize, gridSize);
-    }
-  }
-}
-
 // vocal, drum, bass, and other are volumes ranging from 0 to 100
 function draw_one_frame(words, vocal, drum, bass, other, counter) {
 
@@ -45,10 +32,8 @@ add_to_history(drum_history, drum);
 add_to_history(bass_history, bass);
 add_to_history(other_history, other);
 
-generateNoiseGrid(20); // Generate the noise grid with a grid size of 20
-
-
-
+image(Horse,0,0);
+background(135);
 let total = map(vocal+drum+bass+other,0,359.57,-200,255);
 let totalAngle = map(vocal+drum+bass+other,0,359.57, 0, 360);
 
@@ -56,7 +41,7 @@ fill(total,total,total);
 stroke(255,total);
 strokeWeight(2);
 
-// donutPlace(canvasX / 2, canvasY / 2, 0, 0, totalAngle);
+donutPlace(canvasX / 2, canvasY / 2, 0, 0, totalAngle);
 
 function donutPlace(positionX, positionY, translateX, tranlateY, rotation){
 push();
