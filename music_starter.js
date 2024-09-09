@@ -48,8 +48,9 @@ add_to_history(other_history, other);
 // donutHistory(canvasX/2, canvasY/2,1000,0.2);
 // }
 
-donutHistory(canvasX/2, canvasY/2,1000,0.2);
-function donutHistory(centerX, centerY,circleRadius,min){
+donutHistory(canvasX/2, canvasY/2,1000,0.2,words, vocal, drum, bass, other, counter);
+}
+function donutHistory(centerX, centerY,circleRadius,min,words, vocal, drum, bass, other, counter){
 
 let maximum = (centerY - (circleRadius));
 let minimum = (centerY - (min * circleRadius));
@@ -76,47 +77,53 @@ const AudioLevelPoint_otherMap = [];
 
 for(let i = 0; i < 360; i++){
   AudioLevelPoint_vocalMap.push([
-    (centerX - centerX) * cos(i) - (AudioLevelPoint_vocalMap[counter-i] - centerY) * sin(i) + centerX,
-    (centerX - centerX) * sin(i) + (AudioLevelPoint_vocalMap[counter-i] - centerY) * cos(i) + centerY
+    (centerX - centerX) * cos(i) - (history_vocalMap[counter-i] - centerY) * sin(i) + centerX,
+    (centerX - centerX) * sin(i) + (history_vocalMap[counter-i] - centerY) * cos(i) + centerY
     ])
     AudioLevelPoint_drumMap.push([
-    (centerX - centerX) * cos(i) - (AudioLevelPoint_drumMap[counter-i] - centerY) * sin(i) + centerX,
-    (centerX - centerX) * sin(i) + (AudioLevelPoint_drumMap[counter-i] - centerY) * cos(i) + centerY
+    (centerX - centerX) * cos(i) - (history_drumMap[counter-i] - centerY) * sin(i) + centerX,
+    (centerX - centerX) * sin(i) + (history_drumMap[counter-i] - centerY) * cos(i) + centerY
     ])
     AudioLevelPoint_bassMap.push([
-    (centerX - centerX) * cos(i) - (AudioLevelPoint_bassMap[counter-i] - centerY) * sin(i) + centerX,
-    (centerX - centerX) * sin(i) + (AudioLevelPoint_bassMap[counter-i] - centerY) * cos(i) + centerY
+    (centerX - centerX) * cos(i) - (history_bassMap[counter-i] - centerY) * sin(i) + centerX,
+    (centerX - centerX) * sin(i) + (history_bassMap[counter-i] - centerY) * cos(i) + centerY
     ])
     AudioLevelPoint_otherMap.push([
-    (centerX - centerX) * cos(i) - (AudioLevelPoint_otherMap[counter-i] - centerY) * sin(i) + centerX,
-    (centerX - centerX) * sin(i) + (AudioLevelPoint_otherMap[counter-i] - centerY) * cos(i) + centerY
+    (centerX - centerX) * cos(i) - (history_otherMap[counter-i] - centerY) * sin(i) + centerX,
+    (centerX - centerX) * sin(i) + (history_otherMap[counter-i] - centerY) * cos(i) + centerY
     ])
 }
-
+let trueCounter = counter
+if(counter < 360){
+   trueCounter = 0
+}
+else{
+  trueCounter = counter
+}
 stroke(10)
 beginShape(LINES);
       for(let i = 0; i < 360; i++){
-        vertex(AudioLevelPoint_vocalMap[counter-i][0],AudioLevelPoint_vocalMap[counter-i][1]);
+        vertex(AudioLevelPoint_vocalMap[trueCounter - i][0],AudioLevelPoint_vocalMap[trueCounter - i][1]);
       }
-      vertex(AudioLevelPoint_vocalMap[counter-360][0],AudioLevelPoint_vocalMap[counter-360][1]);
+      vertex(AudioLevelPoint_vocalMap[trueCounter-360][0],AudioLevelPoint_vocalMap[trueCounter-360][1]);
 endShape();
 beginShape(LINES);
       for(let i = 0; i < 360; i++){
-        vertex(AudioLevelPoint_drumMap[counter-i][0],AudioLevelPoint_drumMap[counter-i][1]);
+        vertex(AudioLevelPoint_drumMap[trueCounter - i][0],AudioLevelPoint_drumMap[trueCounter - i][1]);
       }
-      vertex(AudioLevelPoint_drumMap[counter-360][0],AudioLevelPoint_drumMap[counter-360][1]);
+      vertex(AudioLevelPoint_drumMap[trueCounter-360][0],AudioLevelPoint_drumMap[trueCounter-360][1]);
 endShape();
 beginShape(LINES);
       for(let i = 0; i < 360; i++){
-        vertex(AudioLevelPoint_bassMap[counter-i][0],AudioLevelPoint_bassMap[counter-i][1]);
+        vertex(AudioLevelPoint_bassMap[(counter << 360 ? 0 : counter-i)][0],AudioLevelPoint_bassMap[trueCounter - i][1]);
       }
-      vertex(AudioLevelPoint_bassMap[counter-360][0],AudioLevelPoint_bassMap[counter-360][1]);
+      vertex(AudioLevelPoint_bassMap[trueCounter-360][0],AudioLevelPoint_bassMap[trueCounter-360][1]);
 endShape();
 beginShape(LINES);
       for(let i = 0; i < 360; i++){
-        vertex(AudioLevelPoint_otherMap[counter-i][0],AudioLevelPoint_otherMap[counter-i][1]);
+        vertex(AudioLevelPoint_otherMap[trueCounter - i][0],AudioLevelPoint_otherMap[trueCounter - i][1]);
       }
-      vertex(AudioLevelPoint_otherMap[counter-360][0],AudioLevelPoint_otherMap[counter-360][1]);
+      vertex(AudioLevelPoint_otherMap[trueCounter-360][0],AudioLevelPoint_otherMap[trueCounter-360][1]);
 endShape();
 
 }
@@ -191,5 +198,4 @@ function donutVisualCurved(centerX, centerY,circleRadius,min,max){
   endShape();
   }
 
-}
 
