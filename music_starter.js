@@ -1,8 +1,4 @@
-let Horse;
-let firstRun = true
 let numberOfTimes = 20 //Changes the Number of times the 4 audio leevels are dsipalyed 
-let star = false
-let smoothingValue = 0
 let words_history = [];
 let vocal_history = [];
 let drum_history = [];
@@ -34,10 +30,6 @@ function draw_one_frame(words, vocal, drum, bass, other, counter) {
   textFont('Verdana'); // please use CSS safe fonts
   rectMode(CENTER)
   textSize(24);
-  if(firstRun){
-    Horse = loadImage('Horse.png');
-      firstRun = false
-  }
 
 add_to_history(words_history, words);
 add_to_history(vocal_history, vocal);
@@ -45,21 +37,92 @@ add_to_history(drum_history, drum);
 add_to_history(bass_history, bass);
 add_to_history(other_history, other);
 
-if(counter <= 480){
-generateNoiseGrid(20); 
-blackScreen1 = map(other,65,66,255,0);
-fill(0,blackScreen1);
-rect(0,0,2*canvasX,2*canvasY);
+// if(counter <= 480){
+// generateNoiseGrid(20); 
+// blackScreen1 = map(other,65,66,255,0);
+// fill(0,blackScreen1);
+// rect(0,0,2*canvasX,2*canvasY);
+// }
+
+// if(counter >= 480 && counter <= 2640){
+// donutHistory(canvasX/2, canvasY/2,1000,0.2);
+// }
+
+donutHistory(canvasX/2, canvasY/2,1000,0.2);
+function donutHistory(centerX, centerY,circleRadius,min){
+
+let maximum = (centerY - (circleRadius));
+let minimum = (centerY - (min * circleRadius));
+
+let vocalMap = map(vocal,0,100,minimum,maximum);
+let drumMap = map(drum,0,100,minimum,maximum);
+let bassMap = map(bass,0,100,minimum,maximum);
+let otherMap = map(other,0,100,minimum,maximum);
+
+let history_vocalMap = [];
+let history_drumMap = [];
+let history_bassMap = [];
+let history_otherMap = [];
+
+add_to_history(history_vocalMap, vocalMap);
+add_to_history(history_drumMap, drumMap);
+add_to_history(history_bassMap, bassMap);
+add_to_history(history_otherMap, otherMap);
+
+const AudioLevelPoint_vocalMap = [];
+const AudioLevelPoint_drumMap = [];
+const AudioLevelPoint_bassMap = [];
+const AudioLevelPoint_otherMap = [];
+
+for(let i = 0; i < 360; i++){
+  AudioLevelPoint_vocalMap.push([
+    (centerX - centerX) * cos(i) - (AudioLevelPoint_vocalMap[counter-i] - centerY) * sin(i) + centerX,
+    (centerX - centerX) * sin(i) + (AudioLevelPoint_vocalMap[counter-i] - centerY) * cos(i) + centerY
+    ])
+    AudioLevelPoint_drumMap.push([
+    (centerX - centerX) * cos(i) - (AudioLevelPoint_drumMap[counter-i] - centerY) * sin(i) + centerX,
+    (centerX - centerX) * sin(i) + (AudioLevelPoint_drumMap[counter-i] - centerY) * cos(i) + centerY
+    ])
+    AudioLevelPoint_bassMap.push([
+    (centerX - centerX) * cos(i) - (AudioLevelPoint_bassMap[counter-i] - centerY) * sin(i) + centerX,
+    (centerX - centerX) * sin(i) + (AudioLevelPoint_bassMap[counter-i] - centerY) * cos(i) + centerY
+    ])
+    AudioLevelPoint_otherMap.push([
+    (centerX - centerX) * cos(i) - (AudioLevelPoint_otherMap[counter-i] - centerY) * sin(i) + centerX,
+    (centerX - centerX) * sin(i) + (AudioLevelPoint_otherMap[counter-i] - centerY) * cos(i) + centerY
+    ])
 }
 
-if(counter >= 480 && counter <= 2640){
-  smoothingValue = 0
-  donutVisualCurved(canvasX/2, canvasY/2,1000,0.2,1);
+stroke(10)
+beginShape(LINES);
+      for(let i = 0; i < 360; i++){
+        vertex(AudioLevelPoint_vocalMap[counter-i][0],AudioLevelPoint_vocalMap[counter-i][1]);
+      }
+      vertex(AudioLevelPoint_vocalMap[counter-360][0],AudioLevelPoint_vocalMap[counter-360][1]);
+endShape();
+beginShape(LINES);
+      for(let i = 0; i < 360; i++){
+        vertex(AudioLevelPoint_drumMap[counter-i][0],AudioLevelPoint_drumMap[counter-i][1]);
+      }
+      vertex(AudioLevelPoint_drumMap[counter-360][0],AudioLevelPoint_drumMap[counter-360][1]);
+endShape();
+beginShape(LINES);
+      for(let i = 0; i < 360; i++){
+        vertex(AudioLevelPoint_bassMap[counter-i][0],AudioLevelPoint_bassMap[counter-i][1]);
+      }
+      vertex(AudioLevelPoint_bassMap[counter-360][0],AudioLevelPoint_bassMap[counter-360][1]);
+endShape();
+beginShape(LINES);
+      for(let i = 0; i < 360; i++){
+        vertex(AudioLevelPoint_otherMap[counter-i][0],AudioLevelPoint_otherMap[counter-i][1]);
+      }
+      vertex(AudioLevelPoint_otherMap[counter-360][0],AudioLevelPoint_otherMap[counter-360][1]);
+endShape();
+
 }
 
-//get history line runing from center up 
-//get rotation working via the cneter 2d coding stuff
-//
+
+
 
 function donutVisual(centerX, centerY,circleRadius,min,max){
 
