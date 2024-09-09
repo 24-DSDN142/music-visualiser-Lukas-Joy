@@ -57,6 +57,9 @@ if(counter >= 480 && counter <= 2640){
   donutVisualCurved(canvasX/2, canvasY/2,1000,0.2,1);
 }
 
+//get history line runing from center up 
+//get rotation working via the cneter 2d coding stuff
+//
 
 function donutVisual(centerX, centerY,circleRadius,min,max){
 
