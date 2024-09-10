@@ -12,24 +12,24 @@ function add_to_history(history, d) {
   }
 }
 
-function generateNoiseGrid(gridSize) {
-  for (let x = 0; x < width; x += gridSize) {
-    for (let y = 0; y < height; y += gridSize) {
-      if (random() > 0.5) {
-        fill(255); // white
-      } else {
-        fill(0); // black
-      }
-      rect(x, y, gridSize, gridSize);
-    }
-  }
-}
+
 
 
 
 // vocal, drum, bass, and other are volumes ranging from 0 to 100
 function draw_one_frame(words, vocal, drum, bass, other, counter) {
-  
+  function generateNoiseGrid(gridSize) {
+    for (let x = 0; x < width; x += gridSize) {
+      for (let y = 0; y < height; y += gridSize) {
+        if (random() > 0.5) {
+          fill(255); // white
+        } else {
+          fill(0); // black
+        }
+        rect(x, y, gridSize, gridSize);
+      }
+    }
+  }
   function donutVisual(centerX, centerY,circleRadius,min,max){
   
   let maximum = (centerY - (max * circleRadius));
@@ -108,12 +108,7 @@ add_to_history(drum_history, drum);
 add_to_history(bass_history, bass);
 add_to_history(other_history, other);
 
-if(counter <= 2640){
-  donutHistory(canvasX/2,canvasY/2,500,vocal_history);
-  donutHistory(canvasX/2,canvasY/2,400,drum_history);
-  donutHistory(canvasX/2,canvasY/2,300,bass_history);
-  donutHistory(canvasX/2,canvasY/2,200,other_history);
-}
+
 
 if(counter <= 480){
 generateNoiseGrid(20); 
@@ -122,30 +117,73 @@ fill(0,blackScreen1);
 rect(0,0,2*canvasX,2*canvasY);
 }
 
+if(counter <= 2640 && counter >= 480 || counter <= 6900 && counter >= 4740 || counter <= 10920 && counter >= 8940){
+let sizeAdd = 0
+let offsetAngle = 0;
+  if(drum > 70){
+    sizeAdd = 250
+  }else{
+    sizeAdd = 0
+  }
+  donutHistoryAntiClockWise(canvasX/2,canvasY/2,500+sizeAdd,vocal_history,180,offsetAngle);
+  donutHistoryAntiClockWise(canvasX/2,canvasY/2,500+sizeAdd,drum_history,180,offsetAngle);
+  donutHistoryAntiClockWise(canvasX/2,canvasY/2,500+sizeAdd,bass_history,180,offsetAngle);
+  donutHistoryAntiClockWise(canvasX/2,canvasY/2,500+sizeAdd,other_history,180,offsetAngle);
+  donutHistoryClockWise(canvasX/2,canvasY/2,500+sizeAdd,vocal_history,180,offsetAngle);
+  donutHistoryClockWise(canvasX/2,canvasY/2,500+sizeAdd,drum_history,180,offsetAngle);
+  donutHistoryClockWise(canvasX/2,canvasY/2,500+sizeAdd,bass_history,180,offsetAngle);
+  donutHistoryClockWise(canvasX/2,canvasY/2,500+sizeAdd,other_history,180,offsetAngle);
+}
 
 
-function donutHistory(centerX,centerY,circleRadius,audioType){
+
+
+
+function donutHistoryClockWise(centerX,centerY,circleRadius,audioType,degrees,offsetAngle){
   let max = circleRadius/100
 
-  let fullCircle = 360
-  if(audioType.length <= 360){
+  let fullCircle = degrees
+  if(audioType.length <= degrees){
     fullCircle = audioType.length
   }
   else{
-    fullCircle = 360
+    fullCircle = degrees
   }
-  
-  beginShape(LINES);
+
+  fill(0,0,0,135);
+  beginShape();
   for(i=0;i<fullCircle;i++){
-    vertex((centerX - centerX) * cos(i) - ((centerY-((audioType[fullCircle-i])*max)) - centerY) * sin(i) + centerX,
-          (centerX - centerX) * sin(i) + ((centerY-((audioType[fullCircle-i])*max)) - centerY) * cos(i) + centerY)
+    vertex((centerX - centerX) * cos(i+offsetAngle) - ((centerY-((audioType[fullCircle-i])*max)) - centerY) * sin(i+offsetAngle) + centerX,
+          (centerX - centerX) * sin(i+offsetAngle) + ((centerY-((audioType[fullCircle-i])*max)) - centerY) * cos(i+offsetAngle) + centerY)
     
   }
-  vertex((centerX - centerX) * cos(i) - ((centerY-((audioType[fullCircle-360])*max)) - centerY) * sin(i) + centerX,
-        (centerX - centerX) * sin(i) + ((centerY-((audioType[fullCircle-360])*max)) - centerY) * cos(i) + centerY)
+  vertex((centerX - centerX) * cos(i+offsetAngle) - ((centerY-((audioType[0])*max)) - centerY) * sin(i+offsetAngle) + centerX,
+        (centerX - centerX) * sin(i+offsetAngle) + ((centerY-((audioType[0])*max)) - centerY) * cos(i+offsetAngle) + centerY)
   endShape();
 }
 
+function donutHistoryAntiClockWise(centerX,centerY,circleRadius,audioType,degrees,offsetAngle){
+  let max = circleRadius/100
+
+  let fullCircle = degrees
+  if(audioType.length <= degrees){
+    fullCircle = audioType.length
+  }
+  else{
+    fullCircle = degrees
+  }
+  
+  fill(0,0,0,135);
+  beginShape();
+  for(i=0;i<fullCircle;i++){
+    vertex((centerX - centerX) * cos(-i+offsetAngle) - ((centerY-((audioType[fullCircle-i])*max)) - centerY) * sin(-i+offsetAngle) + centerX,
+          (centerX - centerX) * sin(-i+offsetAngle) + ((centerY-((audioType[fullCircle-i])*max)) - centerY) * cos(-i+offsetAngle) + centerY)
+    
+  }
+  vertex((centerX - centerX) * cos(-i+offsetAngle) - ((centerY-((audioType[0])*max)) - centerY) * sin(-i+offsetAngle) + centerX,
+        (centerX - centerX) * sin(-i+offsetAngle) + ((centerY-((audioType[0])*max)) - centerY) * cos(-i+offsetAngle) + centerY)
+  endShape();
+}
 
 
 
