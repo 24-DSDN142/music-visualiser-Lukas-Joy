@@ -117,25 +117,43 @@ fill(0,blackScreen1);
 rect(0,0,2*canvasX,2*canvasY);
 }
 
-if(counter <= 2640 && counter >= 480 || counter <= 6900 && counter >= 4740 || counter <= 10920 && counter >= 8940){
+if(counter >= 480 && counter <= 2640 || counter >= 4740 && counter <= 6900 || counter >= 8940 && counter <= 10920 ){
+smoothingValue = 100
 let sizeAdd = 0
-let offsetAngle = 0;
   if(drum > 70){
-    sizeAdd = 250
+    sizeAdd = 200
   }else{
     sizeAdd = 0
   }
-  donutHistoryAntiClockWise(canvasX/2,canvasY/2,500+sizeAdd,vocal_history,180,offsetAngle);
-  donutHistoryAntiClockWise(canvasX/2,canvasY/2,500+sizeAdd,drum_history,180,offsetAngle);
-  donutHistoryAntiClockWise(canvasX/2,canvasY/2,500+sizeAdd,bass_history,180,offsetAngle);
-  donutHistoryAntiClockWise(canvasX/2,canvasY/2,500+sizeAdd,other_history,180,offsetAngle);
-  donutHistoryClockWise(canvasX/2,canvasY/2,500+sizeAdd,vocal_history,180,offsetAngle);
-  donutHistoryClockWise(canvasX/2,canvasY/2,500+sizeAdd,drum_history,180,offsetAngle);
-  donutHistoryClockWise(canvasX/2,canvasY/2,500+sizeAdd,bass_history,180,offsetAngle);
-  donutHistoryClockWise(canvasX/2,canvasY/2,500+sizeAdd,other_history,180,offsetAngle);
+  donutHistoryAntiClockWise(canvasX/2,canvasY/2,600+sizeAdd,vocal_history,180,0);
+  donutHistoryAntiClockWise(canvasX/2,canvasY/2,600+sizeAdd,drum_history,180,180);
+  donutHistoryAntiClockWise(canvasX/2,canvasY/2,600+sizeAdd,bass_history,180,0);
+  donutHistoryAntiClockWise(canvasX/2,canvasY/2,600+sizeAdd,other_history,180,180);
+  donutHistoryClockWise(canvasX/2,canvasY/2,600+sizeAdd,vocal_history,180,0);
+  donutHistoryClockWise(canvasX/2,canvasY/2,600+sizeAdd,drum_history,180,180);
+  donutHistoryClockWise(canvasX/2,canvasY/2,600+sizeAdd,bass_history,180,0);
+  donutHistoryClockWise(canvasX/2,canvasY/2,600+sizeAdd,other_history,180,180);
 }
-
-
+if(counter >= 2640 && counter <= 4740 || counter >= 6900 && counter <= 8940 || counter >= 10920 && counter <= 12960 ){
+smoothingValue = 100
+let sizeAdd = 0
+  if(drum > 75){
+    sizeAdd = 200
+  }else{
+    sizeAdd = 0  
+  }
+  donutHistoryAntiClockWise(canvasX/2,canvasY/2,600+sizeAdd,vocal_history,180,0);
+  donutHistoryAntiClockWise(canvasX/2,canvasY/2,600+sizeAdd,drum_history,180,180);
+  donutHistoryAntiClockWise(canvasX/2,canvasY/2,600+sizeAdd,bass_history,180,0);
+  donutHistoryAntiClockWise(canvasX/2,canvasY/2,600+sizeAdd,other_history,180,180);
+  donutHistoryClockWise(canvasX/2,canvasY/2,600+sizeAdd,vocal_history,180,0);
+  donutHistoryClockWise(canvasX/2,canvasY/2,600+sizeAdd,drum_history,180,180);
+  donutHistoryClockWise(canvasX/2,canvasY/2,600+sizeAdd,bass_history,180,0);
+  donutHistoryClockWise(canvasX/2,canvasY/2,600+sizeAdd,other_history,180,180);
+}
+if(counter >= 12960){
+  
+}
 
 
 
