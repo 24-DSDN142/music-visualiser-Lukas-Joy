@@ -290,8 +290,6 @@ if(counter >= 12960){
     donutHistoryClockWise(canvasX/2,canvasY/2,sizeFade,other_history,180,180);
 }
 
-//14051
-
 function donutHistoryClockWise(centerX,centerY,circleRadius,audioType,degrees,offsetAngle){
   let max = circleRadius/100
 
@@ -303,7 +301,7 @@ function donutHistoryClockWise(centerX,centerY,circleRadius,audioType,degrees,of
     fullCircle = degrees
   }
 
-  fill(0,0,0,135);
+  fill(0,0,0,100);
   beginShape();
   for(i=0;i<fullCircle;i++){
     vertex((centerX - centerX) * cos(i+offsetAngle) - ((centerY-((audioType[fullCircle-i])*max)) - centerY) * sin(i+offsetAngle) + centerX,
@@ -326,7 +324,7 @@ function donutHistoryAntiClockWise(centerX,centerY,circleRadius,audioType,degree
     fullCircle = degrees
   }
   
-  fill(0,0,0,135);
+  fill(0,0,0,100);
   beginShape();
   for(i=0;i<fullCircle;i++){
     vertex((centerX - centerX) * cos(-i+offsetAngle) - ((centerY-((audioType[fullCircle-i])*max)) - centerY) * sin(-i+offsetAngle) + centerX,
