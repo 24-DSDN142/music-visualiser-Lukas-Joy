@@ -21,11 +21,8 @@ function draw_one_frame(words, vocal, drum, bass, other, counter) {
   function generateNoiseGrid(gridSize) {
     for (let x = 0; x < width; x += gridSize) {
       for (let y = 0; y < height; y += gridSize) {
-        if (random() > 0.5) {
-          fill(255); // white
-        } else {
-          fill(0); // black
-        }
+        let fillColour = map(random(),0.5,0.50000000000000000001,0,255);
+        fill(fillColour);
         rect(x, y, gridSize, gridSize);
       }
     }
@@ -206,10 +203,7 @@ if(counter >= 10920-120 && counter <= 10920){
   
 }
 
-
-
-
-if(counter >= 2640 && counter <= 4740 || counter >= 6900 && counter <= 8940 || counter >= 10920 && counter <= 12960 ){
+if(counter >= 2640 && counter <= 4740-120 || counter >= 6900 && counter <= 8940-120 || counter >= 10920 && counter <= 12960-120 ){
 let sizeAdd = 0
   if(drum > 70){
     sizeAdd = 200
@@ -224,6 +218,76 @@ let sizeAdd = 0
   donutHistoryClockWise(0,canvasY/2,900+sizeAdd,drum_history,180,0);
   donutHistoryClockWise(canvasX,canvasY/2,900+sizeAdd,bass_history,180,180);
   donutHistoryClockWise(0,canvasY/2,900+sizeAdd,other_history,180,0);
+}
+
+if(counter >= 4740-120 && counter <= 4740){
+  let sizeAdd = 0
+    if(drum > 67.5){
+      sizeAdd = 200
+    }else{
+      sizeAdd = 0
+    }
+    //All these names are actually false and are flipped to go in the reverse direction suggested in the name
+    let xToZero = map(counter,4740-120,4740,0,canvasX/2);
+    let x2Tox = map(counter,4740-120,4740,canvasX,canvasX/2);
+    let sizetrans = map(counter,4740-120,4740,900,600);
+    let ZeroToOneEighty = map(counter,4740-120,4740,180,0);
+    let OneEightyToZero = map(counter,4740-120,4740,0,180);
+    donutHistoryAntiClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,vocal_history,180,ZeroToOneEighty);
+    donutHistoryAntiClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,drum_history,180,OneEightyToZero);
+    donutHistoryAntiClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,bass_history,180,ZeroToOneEighty);
+    donutHistoryAntiClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,other_history,180,OneEightyToZero);
+    donutHistoryClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,vocal_history,180,ZeroToOneEighty);
+    donutHistoryClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,drum_history,180,OneEightyToZero);
+    donutHistoryClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,bass_history,180,ZeroToOneEighty);
+    donutHistoryClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,other_history,180,OneEightyToZero);
+  
+}
+if(counter >= 8940-120 && counter <= 8940){
+  let sizeAdd = 0
+    if(drum > 67.5){
+      sizeAdd = 200
+    }else{
+      sizeAdd = 0
+    }
+    //All these names are actually false and are flipped to go in the reverse direction suggested in the name
+    let xToZero = map(counter,8940-120,8940,0,canvasX/2);
+    let x2Tox = map(counter,8940-120,8940,canvasX,canvasX/2);
+    let sizetrans = map(counter,8940-120,8940,900,600);
+    let ZeroToOneEighty = map(counter,8940-120,8940,180,0);
+    let OneEightyToZero = map(counter,8940-120,8940,0,180);
+    donutHistoryAntiClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,vocal_history,180,ZeroToOneEighty);
+    donutHistoryAntiClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,drum_history,180,OneEightyToZero);
+    donutHistoryAntiClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,bass_history,180,ZeroToOneEighty);
+    donutHistoryAntiClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,other_history,180,OneEightyToZero);
+    donutHistoryClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,vocal_history,180,ZeroToOneEighty);
+    donutHistoryClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,drum_history,180,OneEightyToZero);
+    donutHistoryClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,bass_history,180,ZeroToOneEighty);
+    donutHistoryClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,other_history,180,OneEightyToZero);
+  
+}
+if(counter >= 12960-120 && counter <= 12960){
+  let sizeAdd = 0
+    if(drum > 67.5){
+      sizeAdd = 200
+    }else{
+      sizeAdd = 0
+    }
+    //All these names are actually false and are flipped to go in the reverse direction suggested in the name
+    let xToZero = map(counter,12960-120,12960,0,canvasX,0);
+    let x2Tox = map(counter,12960-120,12960,canvasX,canvasX/2);
+    let sizetrans = map(counter,12960-120,12960,900,600);
+    let ZeroToOneEighty = map(counter,12960-120,12960,180,0);
+    let OneEightyToZero = map(counter,12960-120,12960,0,180);
+    donutHistoryAntiClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,vocal_history,180,ZeroToOneEighty);
+    donutHistoryAntiClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,drum_history,180,OneEightyToZero);
+    donutHistoryAntiClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,bass_history,180,ZeroToOneEighty);
+    donutHistoryAntiClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,other_history,180,OneEightyToZero);
+    donutHistoryClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,vocal_history,180,ZeroToOneEighty);
+    donutHistoryClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,drum_history,180,OneEightyToZero);
+    donutHistoryClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,bass_history,180,ZeroToOneEighty);
+    donutHistoryClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,other_history,180,OneEightyToZero);
+  
 }
 if(counter >= 12960){
   
