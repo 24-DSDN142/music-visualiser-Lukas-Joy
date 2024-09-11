@@ -101,14 +101,9 @@ add_to_history(drum_history, drum);
 add_to_history(bass_history, bass);
 add_to_history(other_history, other);
 
-if(counter <= 480){
-generateNoiseGrid(20); 
-blackScreen1 = map(other,65,66,255,0);
-fill(0,blackScreen1);
-rect(0,0,2*canvasX,2*canvasY);
-}
 
-if(counter >= 480 && counter <= 2640-120 || counter >= 4740 && counter <= 6900-120 || counter >= 8940 && counter <= 10920-120 ){
+
+if(counter <= 2640-120 || counter >= 4740 && counter <= 6900-120 || counter >= 8940 && counter <= 10920-120 ){
 let sizeAdd = 0
   if(drum > 65){
     sizeAdd = 200
@@ -125,6 +120,13 @@ let sizeAdd = 0
   donutHistoryClockWise(canvasX/2,canvasY/2,600+sizeAdd,other_history,180,180);
 }
 
+if(counter <= 480){
+  generateNoiseGrid(20); 
+  blackScreen1 = map(other,65,66,255,0);
+  fill(0,blackScreen1);
+  rect(0,0,2*canvasX,2*canvasY);
+  }
+  
 if(counter >= 2640-120 && counter <= 2640){
   let sizeAdd = 0
     if(drum > 67.5){
@@ -301,7 +303,7 @@ function donutHistoryClockWise(centerX,centerY,circleRadius,audioType,degrees,of
     fullCircle = degrees
   }
 
-  fill(0,0,0,100);
+  fill(0,0,0,65);
   beginShape();
   for(i=0;i<fullCircle;i++){
     vertex((centerX - centerX) * cos(i+offsetAngle) - ((centerY-((audioType[fullCircle-i])*max)) - centerY) * sin(i+offsetAngle) + centerX,
@@ -324,7 +326,7 @@ function donutHistoryAntiClockWise(centerX,centerY,circleRadius,audioType,degree
     fullCircle = degrees
   }
   
-  fill(0,0,0,100);
+  fill(0,0,0,65);
   beginShape();
   for(i=0;i<fullCircle;i++){
     vertex((centerX - centerX) * cos(-i+offsetAngle) - ((centerY-((audioType[fullCircle-i])*max)) - centerY) * sin(-i+offsetAngle) + centerX,
