@@ -12,10 +12,6 @@ function add_to_history(history, d) {
   }
 }
 
-
-
-
-
 // vocal, drum, bass, and other are volumes ranging from 0 to 100
 function draw_one_frame(words, vocal, drum, bass, other, counter) {
   function generateNoiseGrid(gridSize) {
@@ -105,8 +101,6 @@ add_to_history(drum_history, drum);
 add_to_history(bass_history, bass);
 add_to_history(other_history, other);
 
-
-
 if(counter <= 480){
 generateNoiseGrid(20); 
 blackScreen1 = map(other,65,66,255,0);
@@ -129,12 +123,7 @@ let sizeAdd = 0
   donutHistoryClockWise(canvasX/2,canvasY/2,600+sizeAdd,drum_history,180,180);
   donutHistoryClockWise(canvasX/2,canvasY/2,600+sizeAdd,bass_history,180,0);
   donutHistoryClockWise(canvasX/2,canvasY/2,600+sizeAdd,other_history,180,180);
-
 }
-
-
-
-
 
 if(counter >= 2640-120 && counter <= 2640){
   let sizeAdd = 0
@@ -156,8 +145,8 @@ if(counter >= 2640-120 && counter <= 2640){
     donutHistoryClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,drum_history,180,OneEightyToZero);
     donutHistoryClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,bass_history,180,ZeroToOneEighty);
     donutHistoryClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,other_history,180,OneEightyToZero);
-  
 }
+
 if(counter >= 6900-120 && counter <= 6900){
   let sizeAdd = 0
     if(drum > 67.5){
@@ -178,8 +167,8 @@ if(counter >= 6900-120 && counter <= 6900){
     donutHistoryClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,drum_history,180,OneEightyToZero);
     donutHistoryClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,bass_history,180,ZeroToOneEighty);
     donutHistoryClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,other_history,180,OneEightyToZero);
-  
 }
+
 if(counter >= 10920-120 && counter <= 10920){
   let sizeAdd = 0
     if(drum > 67.5){
@@ -200,7 +189,6 @@ if(counter >= 10920-120 && counter <= 10920){
     donutHistoryClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,drum_history,180,OneEightyToZero);
     donutHistoryClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,bass_history,180,ZeroToOneEighty);
     donutHistoryClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,other_history,180,OneEightyToZero);
-  
 }
 
 if(counter >= 2640 && counter <= 4740-120 || counter >= 6900 && counter <= 8940-120 || counter >= 10920 && counter <= 12960-120 ){
@@ -289,9 +277,20 @@ if(counter >= 12960-120 && counter <= 12960){
     donutHistoryClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,other_history,180,OneEightyToZero);
   
 }
+
 if(counter >= 12960){
-  
+  let sizeFade = map(counter,12960,14051,600,0);
+    donutHistoryAntiClockWise(canvasX/2,canvasY/2,sizeFade,vocal_history,180,0);
+    donutHistoryAntiClockWise(canvasX/2,canvasY/2,sizeFade,drum_history,180,180);
+    donutHistoryAntiClockWise(canvasX/2,canvasY/2,sizeFade,bass_history,180,0);
+    donutHistoryAntiClockWise(canvasX/2,canvasY/2,sizeFade,other_history,180,180);
+    donutHistoryClockWise(canvasX/2,canvasY/2,sizeFade,vocal_history,180,0);
+    donutHistoryClockWise(canvasX/2,canvasY/2,sizeFade,drum_history,180,180);
+    donutHistoryClockWise(canvasX/2,canvasY/2,sizeFade,bass_history,180,0);
+    donutHistoryClockWise(canvasX/2,canvasY/2,sizeFade,other_history,180,180);
 }
+
+//14051
 
 function donutHistoryClockWise(centerX,centerY,circleRadius,audioType,degrees,offsetAngle){
   let max = circleRadius/100
