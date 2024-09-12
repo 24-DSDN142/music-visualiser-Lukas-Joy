@@ -5,6 +5,9 @@ let drum_history = [];
 let bass_history = [];
 let other_history = [];
 
+let Background;
+let firstRun = true
+
 // function that adds the values from words, voca, drum, bass and other into the empty arrays above each frame
 function add_to_history(history, d) {// this function is based of the framework from the fucntion of the same name in the music_history visualiser example/statrer option
   history.push(d);// pushes the value from the words, vocal, drum, bass or other channel into its specified array based off of the history and d variables
@@ -16,17 +19,26 @@ function add_to_history(history, d) {// this function is based of the framework 
 // vocal, drum, bass, and other are volumes ranging from 0 to 100
 function draw_one_frame(words, vocal, drum, bass, other, counter) {
 
+  //background image
+  if(firstRun){
+    Background = loadImage('Background.png');
+      firstRun = false
+  }
+
+  image(Background,0,0);
+noStroke();
 //noise grid function used to draw the static noise in the beginning
   function generateNoiseGrid(gridSize) {// gridSize is the dimensions in pixels of each of the squares in the static noise backgorund
-    for (let x = 0; x < width; x += gridSize) {// for loop that outputs the x coordinate for each column
-      for (let y = 0; y < height; y += gridSize) {// for loop that outputs the y coordinate for each row
+    for (let x = 0; x <= width; x += gridSize) {// for loop that outputs the x coordinate for each column
+      for (let y = 0; y <= height; y += gridSize) {// for loop that outputs the y coordinate for each row
         let fillColour = map(random(),0.5,0.50000000000000000001,0,255); // if(){} statement disguised as a map(); to randomly output 0 or 255 for black and white for the static noise background
         fill(fillColour);// uses if statment diguised as a map from above to randomly assign either black or white fill to each sqaure in the staic noise grid each frame
         rect(x, y, gridSize, gridSize);// draws each of the squares in the static noise background in the grid in the coordinate outputted from the for loops
       }
     }
   }
-
+  strokeWeight(1);
+  stroke(200,200,200,135);
   //these two functions are no longer in use but are the orginal framework that the circular musci hisotyr visualser is based off of
   function donutVisual(centerX, centerY,circleRadius,min,max){
   
@@ -96,7 +108,6 @@ function draw_one_frame(words, vocal, drum, bass, other, counter) {
   }
 
   // console.log(counter) 
-  background(150)
   textFont('Verdana'); // please use CSS safe fonts
   rectMode(CENTER)
   textSize(24);
@@ -127,12 +138,12 @@ let sizeAdd = 0
     sizeAdd = 0
   }
   donutHistoryAntiClockWise(canvasX/2,canvasY/2,600+sizeAdd,vocal_history,180,0);
-  donutHistoryAntiClockWise(canvasX/2,canvasY/2,600+sizeAdd,drum_history,180,180);
-  donutHistoryAntiClockWise(canvasX/2,canvasY/2,600+sizeAdd,bass_history,180,0);
-  donutHistoryAntiClockWise(canvasX/2,canvasY/2,600+sizeAdd,other_history,180,180);
   donutHistoryClockWise(canvasX/2,canvasY/2,600+sizeAdd,vocal_history,180,0);
+  donutHistoryAntiClockWise(canvasX/2,canvasY/2,600+sizeAdd,other_history,180,180);
   donutHistoryClockWise(canvasX/2,canvasY/2,600+sizeAdd,drum_history,180,180);
+  donutHistoryAntiClockWise(canvasX/2,canvasY/2,600+sizeAdd,drum_history,180,180);
   donutHistoryClockWise(canvasX/2,canvasY/2,600+sizeAdd,bass_history,180,0);
+  donutHistoryAntiClockWise(canvasX/2,canvasY/2,600+sizeAdd,bass_history,180,0);
   donutHistoryClockWise(canvasX/2,canvasY/2,600+sizeAdd,other_history,180,180);
 }
 
@@ -157,12 +168,12 @@ if(counter >= 2640-120 && counter <= 2640){
     let ZeroToOneEighty = map(counter,2640-120,2640,0,180);
     let OneEightyToZero = map(counter,2640-120,2640,180,0);
     donutHistoryAntiClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,vocal_history,180,ZeroToOneEighty);
-    donutHistoryAntiClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,drum_history,180,OneEightyToZero);
-    donutHistoryAntiClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,bass_history,180,ZeroToOneEighty);
-    donutHistoryAntiClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,other_history,180,OneEightyToZero);
     donutHistoryClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,vocal_history,180,ZeroToOneEighty);
+    donutHistoryAntiClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,drum_history,180,OneEightyToZero);
     donutHistoryClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,drum_history,180,OneEightyToZero);
+    donutHistoryAntiClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,bass_history,180,ZeroToOneEighty);
     donutHistoryClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,bass_history,180,ZeroToOneEighty);
+    donutHistoryAntiClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,other_history,180,OneEightyToZero);
     donutHistoryClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,other_history,180,OneEightyToZero);
 }
 // animation section four into five
@@ -180,12 +191,12 @@ if(counter >= 6900-120 && counter <= 6900){
     let ZeroToOneEighty = map(counter,6900-120,6900,0,180);
     let OneEightyToZero = map(counter,6900-120,6900,180,0);
     donutHistoryAntiClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,vocal_history,180,ZeroToOneEighty);
-    donutHistoryAntiClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,drum_history,180,OneEightyToZero);
-    donutHistoryAntiClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,bass_history,180,ZeroToOneEighty);
-    donutHistoryAntiClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,other_history,180,OneEightyToZero);
     donutHistoryClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,vocal_history,180,ZeroToOneEighty);
+    donutHistoryAntiClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,bass_history,180,ZeroToOneEighty);
     donutHistoryClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,drum_history,180,OneEightyToZero);
+    donutHistoryAntiClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,other_history,180,OneEightyToZero);
     donutHistoryClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,bass_history,180,ZeroToOneEighty);
+    donutHistoryAntiClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,drum_history,180,OneEightyToZero);
     donutHistoryClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,other_history,180,OneEightyToZero);
 }
 // animation section six into seven
@@ -203,12 +214,12 @@ if(counter >= 10920-120 && counter <= 10920){
     let ZeroToOneEighty = map(counter,10920-120,10920,0,180);
     let OneEightyToZero = map(counter,10920-120,10920,180,0);
     donutHistoryAntiClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,vocal_history,180,ZeroToOneEighty);
-    donutHistoryAntiClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,drum_history,180,OneEightyToZero);
-    donutHistoryAntiClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,bass_history,180,ZeroToOneEighty);
-    donutHistoryAntiClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,other_history,180,OneEightyToZero);
     donutHistoryClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,vocal_history,180,ZeroToOneEighty);
+    donutHistoryAntiClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,drum_history,180,OneEightyToZero);
     donutHistoryClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,drum_history,180,OneEightyToZero);
+    donutHistoryAntiClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,bass_history,180,ZeroToOneEighty);
     donutHistoryClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,bass_history,180,ZeroToOneEighty);
+    donutHistoryAntiClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,other_history,180,OneEightyToZero);
     donutHistoryClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,other_history,180,OneEightyToZero);
 }
 
@@ -221,14 +232,14 @@ let sizeAdd = 0
   }else{
     sizeAdd = 0  
   }
-  donutHistoryAntiClockWise(0,canvasY/2,900+sizeAdd,vocal_history,180,180);
-  donutHistoryAntiClockWise(canvasX,canvasY/2,900+sizeAdd,drum_history,180,0);
-  donutHistoryAntiClockWise(0,canvasY/2,900+sizeAdd,bass_history,180,180);
-  donutHistoryAntiClockWise(canvasX,canvasY/2,900+sizeAdd,other_history,180,0);
   donutHistoryClockWise(canvasX,canvasY/2,900+sizeAdd,vocal_history,180,180);
+  donutHistoryAntiClockWise(0,canvasY/2,900+sizeAdd,vocal_history,180,180);
   donutHistoryClockWise(0,canvasY/2,900+sizeAdd,drum_history,180,0);
+  donutHistoryAntiClockWise(canvasX,canvasY/2,900+sizeAdd,drum_history,180,0);
   donutHistoryClockWise(canvasX,canvasY/2,900+sizeAdd,bass_history,180,180);
+  donutHistoryAntiClockWise(0,canvasY/2,900+sizeAdd,bass_history,180,180);
   donutHistoryClockWise(0,canvasY/2,900+sizeAdd,other_history,180,0);
+  donutHistoryAntiClockWise(canvasX,canvasY/2,900+sizeAdd,other_history,180,0);
 }
 
 // transtiion animations out of the above sections
@@ -253,12 +264,12 @@ if(counter >= 4740-120 && counter <= 4740){
     let ZeroToOneEighty = map(counter,4740-120,4740,180,0);
     let OneEightyToZero = map(counter,4740-120,4740,0,180);
     donutHistoryAntiClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,vocal_history,180,ZeroToOneEighty);
-    donutHistoryAntiClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,drum_history,180,OneEightyToZero);
-    donutHistoryAntiClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,bass_history,180,ZeroToOneEighty);
-    donutHistoryAntiClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,other_history,180,OneEightyToZero);
     donutHistoryClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,vocal_history,180,ZeroToOneEighty);
+    donutHistoryAntiClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,drum_history,180,OneEightyToZero);
     donutHistoryClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,drum_history,180,OneEightyToZero);
+    donutHistoryAntiClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,bass_history,180,ZeroToOneEighty);
     donutHistoryClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,bass_history,180,ZeroToOneEighty);
+    donutHistoryAntiClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,other_history,180,OneEightyToZero);
     donutHistoryClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,other_history,180,OneEightyToZero);
   
 }
@@ -278,12 +289,12 @@ if(counter >= 8940-120 && counter <= 8940){
     let ZeroToOneEighty = map(counter,8940-120,8940,180,0);
     let OneEightyToZero = map(counter,8940-120,8940,0,180);
     donutHistoryAntiClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,vocal_history,180,ZeroToOneEighty);
-    donutHistoryAntiClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,drum_history,180,OneEightyToZero);
-    donutHistoryAntiClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,bass_history,180,ZeroToOneEighty);
-    donutHistoryAntiClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,other_history,180,OneEightyToZero);
     donutHistoryClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,vocal_history,180,ZeroToOneEighty);
+    donutHistoryAntiClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,drum_history,180,OneEightyToZero);
     donutHistoryClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,drum_history,180,OneEightyToZero);
+    donutHistoryAntiClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,bass_history,180,ZeroToOneEighty);
     donutHistoryClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,bass_history,180,ZeroToOneEighty);
+    donutHistoryAntiClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,other_history,180,OneEightyToZero);
     donutHistoryClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,other_history,180,OneEightyToZero);
   
 }
@@ -303,12 +314,12 @@ if(counter >= 12960-120 && counter <= 12960){
     let ZeroToOneEighty = map(counter,12960-120,12960,180,0);
     let OneEightyToZero = map(counter,12960-120,12960,0,180);
     donutHistoryAntiClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,vocal_history,180,ZeroToOneEighty);
-    donutHistoryAntiClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,drum_history,180,OneEightyToZero);
-    donutHistoryAntiClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,bass_history,180,ZeroToOneEighty);
-    donutHistoryAntiClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,other_history,180,OneEightyToZero);
     donutHistoryClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,vocal_history,180,ZeroToOneEighty);
+    donutHistoryAntiClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,drum_history,180,OneEightyToZero);
     donutHistoryClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,drum_history,180,OneEightyToZero);
+    donutHistoryAntiClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,bass_history,180,ZeroToOneEighty);
     donutHistoryClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,bass_history,180,ZeroToOneEighty);
+    donutHistoryAntiClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,other_history,180,OneEightyToZero);
     donutHistoryClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,other_history,180,OneEightyToZero);
   
 }
@@ -317,12 +328,12 @@ if(counter >= 12960-120 && counter <= 12960){
 if(counter >= 12960){
   let sizeFade = map(counter,12960,14051,600,0);
     donutHistoryAntiClockWise(canvasX/2,canvasY/2,sizeFade,vocal_history,180,0);
-    donutHistoryAntiClockWise(canvasX/2,canvasY/2,sizeFade,drum_history,180,180);
-    donutHistoryAntiClockWise(canvasX/2,canvasY/2,sizeFade,bass_history,180,0);
-    donutHistoryAntiClockWise(canvasX/2,canvasY/2,sizeFade,other_history,180,180);
     donutHistoryClockWise(canvasX/2,canvasY/2,sizeFade,vocal_history,180,0);
+    donutHistoryAntiClockWise(canvasX/2,canvasY/2,sizeFade,drum_history,180,180);
     donutHistoryClockWise(canvasX/2,canvasY/2,sizeFade,drum_history,180,180);
+    donutHistoryAntiClockWise(canvasX/2,canvasY/2,sizeFade,bass_history,180,0);
     donutHistoryClockWise(canvasX/2,canvasY/2,sizeFade,bass_history,180,0);
+    donutHistoryAntiClockWise(canvasX/2,canvasY/2,sizeFade,other_history,180,180);
     donutHistoryClockWise(canvasX/2,canvasY/2,sizeFade,other_history,180,180);
 }
 
