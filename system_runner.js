@@ -1,5 +1,5 @@
-const canvasWidth = 540;
-const canvasHeight = 960;
+const canvasX = 1920;
+const canvasY = 1080;
 
 
 let mainCanvas;
@@ -49,7 +49,7 @@ let volumes = [];
 let volume_length = 0;
 
 function setup() {
-  main_canvas = createCanvas(canvasWidth, canvasHeight);
+  main_canvas = createCanvas(canvasX, canvasY);
   main_canvas.parent('canvasContainer');
   song = loadSound('song.mp3', songLoaded, songLoadedError, songLoadedSoFar);  
   
