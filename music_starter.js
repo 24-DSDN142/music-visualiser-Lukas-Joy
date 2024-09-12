@@ -139,11 +139,11 @@ let sizeAdd = 0
   }
   donutHistoryAntiClockWise(canvasX/2,canvasY/2,600+sizeAdd,vocal_history,180,0);
   donutHistoryClockWise(canvasX/2,canvasY/2,600+sizeAdd,vocal_history,180,0);
-  donutHistoryAntiClockWise(canvasX/2,canvasY/2,600+sizeAdd,other_history,180,180);
   donutHistoryClockWise(canvasX/2,canvasY/2,600+sizeAdd,drum_history,180,180);
   donutHistoryAntiClockWise(canvasX/2,canvasY/2,600+sizeAdd,drum_history,180,180);
   donutHistoryClockWise(canvasX/2,canvasY/2,600+sizeAdd,bass_history,180,0);
   donutHistoryAntiClockWise(canvasX/2,canvasY/2,600+sizeAdd,bass_history,180,0);
+  donutHistoryAntiClockWise(canvasX/2,canvasY/2,600+sizeAdd,other_history,180,180);
   donutHistoryClockWise(canvasX/2,canvasY/2,600+sizeAdd,other_history,180,180);
 }
 
@@ -192,11 +192,11 @@ if(counter >= 6900-120 && counter <= 6900){
     let OneEightyToZero = map(counter,6900-120,6900,180,0);
     donutHistoryAntiClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,vocal_history,180,ZeroToOneEighty);
     donutHistoryClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,vocal_history,180,ZeroToOneEighty);
-    donutHistoryAntiClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,bass_history,180,ZeroToOneEighty);
     donutHistoryClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,drum_history,180,OneEightyToZero);
-    donutHistoryAntiClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,other_history,180,OneEightyToZero);
-    donutHistoryClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,bass_history,180,ZeroToOneEighty);
     donutHistoryAntiClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,drum_history,180,OneEightyToZero);
+    donutHistoryAntiClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,bass_history,180,ZeroToOneEighty);
+    donutHistoryClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,bass_history,180,ZeroToOneEighty);
+    donutHistoryAntiClockWise(x2Tox,canvasY/2,sizetrans+sizeAdd,other_history,180,OneEightyToZero);
     donutHistoryClockWise(xToZero,canvasY/2,sizetrans+sizeAdd,other_history,180,OneEightyToZero);
 }
 // animation section six into seven
@@ -308,7 +308,7 @@ if(counter >= 12960-120 && counter <= 12960){
     }
     // remaped values from the counter to the values needed each of the names says what is happening
     //All these names are actually false and are flipped to go in the reverse direction suggested in the name
-    let xToZero = map(counter,12960-120,12960,0,canvasX,0);
+    let xToZero = map(counter,12960-120,12960,0,canvasX/2);
     let x2Tox = map(counter,12960-120,12960,canvasX,canvasX/2);
     let sizetrans = map(counter,12960-120,12960,900,600);
     let ZeroToOneEighty = map(counter,12960-120,12960,180,0);
