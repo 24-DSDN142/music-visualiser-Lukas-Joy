@@ -26,6 +26,7 @@ function draw_one_frame(words, vocal, drum, bass, other, counter) {
       }
     }
   }
+
   //these two functions are no longer in use but are the orginal framework that the circular musci hisotyr visualser is based off of
   function donutVisual(centerX, centerY,circleRadius,min,max){
   
@@ -149,6 +150,7 @@ if(counter >= 2640-120 && counter <= 2640){
     }else{
       sizeAdd = 0
     }
+    // remaped values from the counter to the values needed each of the names says what is happening
     let xToZero = map(counter,2640-120,2640,canvasX/2,0);
     let x2Tox = map(counter,2640-120,2640,canvasX/2,canvasX);
     let sizetrans = map(counter,2640-120,2640,600,900);
@@ -171,6 +173,7 @@ if(counter >= 6900-120 && counter <= 6900){
     }else{
       sizeAdd = 0
     }
+    // remaped values from the counter to the values needed each of the names says what is happening
     let xToZero = map(counter,6900-120,6900,canvasX/2,0);
     let x2Tox = map(counter,6900-120,6900,canvasX/2,canvasX);
     let sizetrans = map(counter,6900-120,6900,600,900);
@@ -193,6 +196,7 @@ if(counter >= 10920-120 && counter <= 10920){
     }else{
       sizeAdd = 0
     }
+    // remaped values from the counter to the values needed each of the names says what is happening
     let xToZero = map(counter,10920-120,10920,canvasX/2,0);
     let x2Tox = map(counter,10920-120,10920,canvasX/2,canvasX);
     let sizetrans = map(counter,10920-120,10920,600,900);
@@ -241,6 +245,7 @@ if(counter >= 4740-120 && counter <= 4740){
     }else{
       sizeAdd = 0
     }
+    // remaped values from the counter to the values needed each of the names says what is happening
     //All these names are actually false and are flipped to go in the reverse direction suggested in the name
     let xToZero = map(counter,4740-120,4740,0,canvasX/2);
     let x2Tox = map(counter,4740-120,4740,canvasX,canvasX/2);
@@ -265,6 +270,7 @@ if(counter >= 8940-120 && counter <= 8940){
     }else{
       sizeAdd = 0
     }
+    // remaped values from the counter to the values needed each of the names says what is happening
     //All these names are actually false and are flipped to go in the reverse direction suggested in the name
     let xToZero = map(counter,8940-120,8940,0,canvasX/2);
     let x2Tox = map(counter,8940-120,8940,canvasX,canvasX/2);
@@ -289,6 +295,7 @@ if(counter >= 12960-120 && counter <= 12960){
     }else{
       sizeAdd = 0
     }
+    // remaped values from the counter to the values needed each of the names says what is happening
     //All these names are actually false and are flipped to go in the reverse direction suggested in the name
     let xToZero = map(counter,12960-120,12960,0,canvasX,0);
     let x2Tox = map(counter,12960-120,12960,canvasX,canvasX/2);
